@@ -21,6 +21,11 @@ export default function Home() {
         title="useOptimistic"
         description="Example of a message box for useOptimistic"
       />
+      <ExampleCard
+        to="/comments"
+        title="use"
+        description="Example of a message box for use hook"
+      />
     </div>
   )
 }

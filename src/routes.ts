@@ -8,9 +8,10 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: lazy(() => import("@/pages/home")) },
       { path: "login", Component: lazy(() => import("@/pages/login")) },
+      { path: "comments", Component: lazy(() => import("@/pages/comments")) },
       {
         path: "texting",
-        Component: lazy(() => import("@/pages/texting/index")),
+        Component: lazy(() => import("@/pages/texting")),
       },
     ],
   },
