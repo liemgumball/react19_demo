@@ -1,17 +1,8 @@
+import { fetchComments } from "@/data/comments"
 import React from "react"
 
-interface Comment {
-  id: number
-  name: string
-  body: string
-}
-
-export const CommentList: React.FC = () => {
-  const comments = React.use(
-    fetch("https://jsonplaceholder.typicode.com/comments").then((response) =>
-      response.json(),
-    ),
-  ) as Comment[]
+export const CommentList: React.FC<{ url: string }> = ({ url }) => {
+  const comments = React.use(fetchComments(url))
 
   return (
     <div>
