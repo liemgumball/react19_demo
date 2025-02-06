@@ -1,16 +1,13 @@
-import path from "node:path";
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react"
+import path from "node:path"
+import { defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react({
       babel: {
-        plugins: [
-          "module:@preact/signals-react-transform",
-          "babel-plugin-react-compiler",
-        ],
+        plugins: ["babel-plugin-react-compiler"],
       },
     }),
   ],
@@ -19,4 +16,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+})
