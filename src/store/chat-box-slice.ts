@@ -1,4 +1,4 @@
-import { waitAndReject, waitAndResolve } from "@/utils/fake-fetch"
+import { wait } from "@/utils/fake-fetch"
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface IMessage {
@@ -37,15 +37,16 @@ const initialState: ChatBoxState = {
   ],
 }
 
-// Define the async thunk
 export const addMessageAsync = createAsyncThunk(
   "chatBox/addMessageAsync",
   async (message: Omit<IMessage, "id">) => {
+    await wait(1000)
+
     if (message.willRejected) {
-      return waitAndReject(message)
+      return Promise.reject(message)
     }
 
-    return waitAndResolve(message)
+    return Promise.resolve(message)
   },
 )
 

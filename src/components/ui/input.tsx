@@ -1,9 +1,12 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { useFormStatus } from "react-dom"
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, type, disabled, ...props }, ref) => {
+    const { pending } = useFormStatus()
+
     return (
       <input
         type={type}
@@ -12,6 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           className,
         )}
         ref={ref}
+        disabled={disabled || pending}
         {...props}
       />
     )

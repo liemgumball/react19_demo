@@ -17,7 +17,7 @@ export default function Home() {
         description="Example of a login form for useActionState"
       />
       <ExampleCard
-        to="/texting"
+        to="/chat-room"
         title="useOptimistic"
         description="Example of a message box for useOptimistic"
       />

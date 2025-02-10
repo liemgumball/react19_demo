@@ -1,5 +1,6 @@
 import { RouterProvider } from "react-router"
 
+import { Toaster } from "@/components/ui/toaster.tsx"
 import { ErrorBoundary } from "react-error-boundary"
 import { Provider } from "react-redux"
 import router from "./routes"
@@ -11,6 +12,7 @@ function App() {
       <Provider store={store}>
         <RouterProvider router={router} />
       </Provider>
+      <Toaster />
     </ErrorBoundary>
   )
 }

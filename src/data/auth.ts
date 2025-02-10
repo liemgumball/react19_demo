@@ -1,4 +1,4 @@
-import { waitAndCallback, waitAndResolve } from "@/utils/fake-fetch"
+import { wait } from "@/utils/fake-fetch"
 
 export type AuthError = {
   message: string
@@ -8,12 +8,14 @@ export type AuthError = {
 export async function login(
   username: string,
   password: string,
-): Promise<AuthError | void> {
+): Promise<AuthError | null> {
+  await wait(1000)
+
+  console.log("Logging in with", { username, password })
+
   if (!username || !password) {
-    return await waitAndResolve({ message: "Failed to login" })
+    return Promise.resolve({ message: "Failed to login" })
   }
 
-  await waitAndCallback(() => {
-    console.log("login", username, password)
-  })
+  return Promise.resolve(null)
 }

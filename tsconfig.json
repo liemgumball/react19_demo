@@ -12,5 +12,6 @@
 
 		"strictNullChecks": true,
 		"skipLibCheck": true
-	}
+	},
+	"allowSyntheticDefaultImports": true,
 }
