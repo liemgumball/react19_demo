@@ -1,16 +1,15 @@
-"use server"
+"use client"
 
-import React, { useRef } from "react"
+import React, { useActionState, useRef } from "react"
 
-import { AuthError, login } from "@/data/auth"
-
-import { toast } from "@/hooks/use-toast.ts"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
+import { formAction } from "@/data/auth.ts"
+import { ResetFormButton } from "./reset-form-button"
 
 export const LoginForm: React.FC = () => {
-  const [error, action, isPending] = React.useActionState(formAction, null, "/")
+  const [error, action, isPending] = useActionState(formAction, null, "/")
   const ref = useRef<HTMLFormElement | null>(null)
 
   return (
@@ -50,34 +49,10 @@ export const LoginForm: React.FC = () => {
           Login
         </Button>
 
-        {/*<ResetFormButton formref={ref} className="w-full">*/}
-        {/*  Reset Form*/}
-        {/*</ResetFormButton>*/}
+        <ResetFormButton formref={ref} className="w-full">
+          Reset Form
+        </ResetFormButton>
       </div>
     </form>
   )
-}
-
-async function formAction(_: AuthError | null, formData: FormData) {
-  const username = formData.get("username") as string
-  const password = formData.get("password") as string
-
-  const error = await login(username, password)
-
-  if (error) {
-    toast({
-      title: "Fail",
-      description: error.message,
-      variant: "destructive",
-    })
-
-    return error
-  }
-
-  toast({
-    title: "Success",
-    description: JSON.stringify({ username, password }),
-  })
-
-  return null
 }

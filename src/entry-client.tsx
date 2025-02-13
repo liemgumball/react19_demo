@@ -1,17 +1,25 @@
 import { hydrateRoot } from "react-dom/client"
 
+import { Toaster } from "@/components/ui/toaster.tsx"
+import routes from "@/routes.ts"
+import store from "@/store"
 import { StrictMode } from "react"
-import App from "./app.tsx"
+import { Provider } from "react-redux"
+import { createBrowserRouter, RouterProvider } from "react-router"
 import "./index.css"
 
 const rootElement = document.getElementById("root")
 
 if (rootElement) {
-  // createRoot(rootElement).render(<App />)
+  const router = createBrowserRouter(routes)
+
   hydrateRoot(
     rootElement,
     <StrictMode>
-      <App />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+        <Toaster />
+      </Provider>
     </StrictMode>,
   )
 }

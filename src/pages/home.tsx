@@ -11,6 +11,7 @@ import { Link } from "react-router"
 export default function Home() {
   return (
     <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
+      <ExampleCard to="/movie" title="Actions" />{" "}
       <ExampleCard
         to="/login"
         title="useActionState"
@@ -35,6 +36,7 @@ interface ExampleCardProps extends React.PropsWithChildren {
   description?: string
   to: string
 }
+
 const ExampleCard: React.FC<ExampleCardProps> = ({
   title,
   description,

@@ -13,5 +13,5 @@ export const fetchCommentsPromise = async (): Promise<Comment[]> => {
 
   await wait(1000)
 
-  return response.json()
+  return await response.json()
 }
