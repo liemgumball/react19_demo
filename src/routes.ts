@@ -13,12 +13,11 @@ const routes: RouteObject[] = [
     children: [
       { index: true, Component: Home },
       { path: "*", Component: NotFound },
-      { path: "movie", Component: lazy(() => import("@/pages/movie")) },
+      { path: "profile", Component: lazy(() => import("@/pages/profile.tsx")) },
       {
         path: "expensive",
         Component: lazy(() => import("@/pages/expensive-page")),
       },
-      { path: "login", Component: lazy(() => import("@/pages/login")) },
       {
         path: "comments",
         Component: lazy(() => import("@/pages/comments")),

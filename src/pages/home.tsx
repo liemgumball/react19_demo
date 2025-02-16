@@ -5,17 +5,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { cn } from "@/lib/utils.ts"
 import * as React from "react"
 import { Link } from "react-router"
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
-      <ExampleCard to="/movie" title="Actions" />{" "}
+    <div className="grid grid-cols-1 gap-8 p-4 md:grid-cols-2">
       <ExampleCard
-        to="/login"
-        title="useActionState"
-        description="Example of a login form for useActionState"
+        to="/profile"
+        title="Actions"
+        description="Example of a profile form for useActionState"
       />
       <ExampleCard
         to="/chat-room"
@@ -27,6 +27,13 @@ export default function Home() {
         title="use"
         description="Example of a message box for use hook"
       />
+      <div className="h-[900px]" />
+      <ExampleCard
+        to="/expensive-page"
+        title="A very expensive component"
+        className="col-span-4 row-span-4 border-destructive text-destructive shadow-2xl shadow-destructive"
+      />
+      <div className="col-span-1 h-32 md:col-span-2" />
     </div>
   )
 }
@@ -35,6 +42,7 @@ interface ExampleCardProps extends React.PropsWithChildren {
   title: string
   description?: string
   to: string
+  className?: string
 }
 
 const ExampleCard: React.FC<ExampleCardProps> = ({
@@ -42,10 +50,11 @@ const ExampleCard: React.FC<ExampleCardProps> = ({
   description,
   children,
   to,
+  className,
 }) => {
   return (
-    <Link to={to}>
-      <Card className="size-full">
+    <Card className={cn("max-h-36 min-w-fit", className)}>
+      <Link to={to}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
@@ -53,7 +62,7 @@ const ExampleCard: React.FC<ExampleCardProps> = ({
         <CardFooter>
           <p className="text-sm text-muted-foreground">{description}</p>
         </CardFooter>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   )
 }

@@ -4,7 +4,7 @@ const UserContext = createContext<IUser | null>(null)
 
 const User = () => {
   return (
-    // use context as a provider
+    // context as provider
     <UserContext value={{ id: "1", name: "John Doe" }}>
       <UserDetails />
     </UserContext>
@@ -22,6 +22,7 @@ const UserDetails = () => {
 }
 
 export default User
+
 export interface IUser {
   id: string
   name: string

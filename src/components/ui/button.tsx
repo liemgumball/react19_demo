@@ -60,7 +60,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
 
     const { pending } = useFormStatus()
-    const disabled = pending || orgDisabled
+    const disabled = pending || orgDisabled || isLoading
 
     return (
       <Comp
