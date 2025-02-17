@@ -1,7 +1,7 @@
 import { hydrateRoot } from "react-dom/client"
 
 import { Toaster } from "@/components/ui/toaster.tsx"
-import routes from "@/routes.ts"
+import { staticHandler } from "@/routes.ts"
 import store from "@/store"
 import { StrictMode } from "react"
 import { Provider } from "react-redux"
@@ -11,7 +11,7 @@ import "./index.css"
 const rootElement = document.getElementById("root")
 
 if (rootElement) {
-  const router = createBrowserRouter(routes)
+  const router = createBrowserRouter(staticHandler.dataRoutes)
 
   hydrateRoot(
     rootElement,

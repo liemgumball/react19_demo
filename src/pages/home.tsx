@@ -11,7 +11,7 @@ import { Link } from "react-router"
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-1 gap-8 p-4 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-8 p-4 md:grid-cols-2 lg:grid-cols-4">
       <ExampleCard
         to="/profile"
         title="Actions"
@@ -23,26 +23,23 @@ export default function Home() {
         description="Example of a message box for useOptimistic"
       />
       <ExampleCard
-        to="/comments"
+        to="/pokemons"
         title="use"
         description="Example of a message box for use hook"
+      />
+      <ExampleCard
+        to="/resources"
+        title="Loading resources"
+        description="Example of a message box for loading resources"
       />
       <div className="h-[900px]" />
       <ExampleCard
         to="/expensive-page"
         title="A very expensive component"
-        className="col-span-4 row-span-4 border-destructive text-destructive shadow-2xl shadow-destructive"
+        className="col-span-1 border-destructive text-destructive shadow-2xl shadow-destructive md:col-span-2"
       />
-      <div className="col-span-1 h-32 md:col-span-2" />
     </div>
   )
-}
-
-interface ExampleCardProps extends React.PropsWithChildren {
-  title: string
-  description?: string
-  to: string
-  className?: string
 }
 
 const ExampleCard: React.FC<ExampleCardProps> = ({
@@ -53,7 +50,7 @@ const ExampleCard: React.FC<ExampleCardProps> = ({
   className,
 }) => {
   return (
-    <Card className={cn("max-h-36 min-w-fit", className)}>
+    <Card className={cn("max-h-40 min-w-fit", className)}>
       <Link to={to}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
@@ -65,4 +62,11 @@ const ExampleCard: React.FC<ExampleCardProps> = ({
       </Link>
     </Card>
   )
+}
+
+interface ExampleCardProps extends React.PropsWithChildren {
+  title: string
+  description?: string
+  to: string
+  className?: string
 }

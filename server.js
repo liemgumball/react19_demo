@@ -15,7 +15,7 @@ const templateHtml = isProduction
 const app = express()
 
 // Add Vite or respective production middlewares
-/** @type {import('vite').ViteDevServer | undefined} */
+/** @type {import("vite").ViteDevServer | undefined} */
 let vite
 if (!isProduction) {
   const { createServer } = await import("vite")
@@ -33,13 +33,13 @@ if (!isProduction) {
 }
 
 // Serve HTML
-app.use("*", async (req, res) => {
+app.get("*", async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, "")
 
     /** @type {string} */
     let template
-    /** @type {import('./src/entry-server.tsx').render} */
+    /** @type {import("./src/entry-server.tsx").render} */
     let render
     if (!isProduction) {
       // Always read fresh template in development

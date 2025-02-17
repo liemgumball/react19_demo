@@ -1,18 +1,18 @@
 "use client"
-import { CommentsData } from "@/components/comments-data.tsx"
 import { InlineLoader } from "@/components/fallback/inline-loader.tsx"
+import { PokemonData } from "@/components/pokemon-data.tsx"
 import { Button } from "@/components/ui/button"
-import { fetchCommentsPromise } from "@/data/comments"
+import { fetchPokemon } from "@/data/pokemons.ts"
 import { useToggle } from "@/hooks/use-toggle.ts"
 import React, { Suspense } from "react"
 
 export const TimeContext = React.createContext<Date | null>(null)
 
-const Comments = () => {
+const Pokemon = () => {
   const [shouldFetch, toggleShouldFetch] = useToggle(false)
   const [useInLoop, toggleUseInLoop] = useToggle(false)
 
-  const dataPromise = fetchCommentsPromise()
+  const dataPromises = Array.from({ length: 12 }, (_, i) => fetchPokemon(i + 1))
 
   return (
     <TimeContext value={new Date()}>
@@ -30,10 +30,10 @@ const Comments = () => {
           use hook inside a loop
         </Button>
         <Suspense fallback={<InlineLoader />}>
-          <CommentsData
+          <PokemonData
             shouldFetch={shouldFetch}
             useInLoop={useInLoop}
-            dataPromise={dataPromise}
+            dataPromise={dataPromises}
             // dataPromise={Promise.reject("Not implemented")}
           />
         </Suspense>
@@ -42,4 +42,4 @@ const Comments = () => {
   )
 }
 
-export default Comments
+export default Pokemon

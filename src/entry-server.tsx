@@ -1,17 +1,13 @@
 import { startTransition, StrictMode } from "react"
 import { renderToString } from "react-dom/server"
-import {
-  createStaticHandler,
-  createStaticRouter,
-  StaticRouterProvider,
-} from "react-router"
+import { createStaticRouter, StaticRouterProvider } from "react-router"
 
 import { Toaster } from "@/components/ui/toaster.tsx"
-import routes from "@/routes.ts"
 import store from "@/store"
 import { IncomingMessage, ServerResponse } from "http"
 import { Provider } from "react-redux"
 
+import { staticHandler } from "@/routes.ts"
 // @ts-expect-error no type
 import createFetchRequest from "./request"
 
@@ -20,15 +16,14 @@ export async function render(
   req: IncomingMessage,
   res: ServerResponse,
 ) {
-  const { query, dataRoutes } = createStaticHandler(routes)
   const fetchRequest = createFetchRequest(req, res)
-  const context = await query(fetchRequest)
+  const context = await staticHandler.query(fetchRequest)
 
   if (context instanceof Response) {
     throw context
   }
 
-  const router = createStaticRouter(dataRoutes, context)
+  const router = createStaticRouter(staticHandler.dataRoutes, context)
 
   let html
 
