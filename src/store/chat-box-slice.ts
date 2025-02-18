@@ -40,7 +40,7 @@ const initialState: ChatBoxState = {
 export const addMessageAsync = createAsyncThunk(
   "chatBox/addMessageAsync",
   async (message: Omit<IMessage, "id">) => {
-    await wait(1000)
+    await wait(5000)
 
     if (message.willRejected) {
       return Promise.reject(message)

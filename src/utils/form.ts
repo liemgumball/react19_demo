@@ -1,3 +1,7 @@
 export function getGenderDescription(gender: string) {
-  return `You are ${gender}`
+  if (gender === "gay") {
+    return `You are ${gender}`
+  }
+
+  return `Updated gender to ${gender}`
 }

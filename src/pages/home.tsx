@@ -32,9 +32,9 @@ export default function Home() {
         title="Loading resources"
         description="Example of a message box for loading resources"
       />
-      <div className="h-[900px]" />
+      <div className="col-span-1 h-[900px] md:col-span-2 lg:col-span-4" />
       <ExampleCard
-        to="/expensive-page"
+        to="/expensive"
         title="A very expensive component"
         className="col-span-1 border-destructive text-destructive shadow-2xl shadow-destructive md:col-span-2"
       />

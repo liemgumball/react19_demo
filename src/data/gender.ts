@@ -8,7 +8,7 @@ export async function updateGender(gender: string): Promise<string | void> {
     return Promise.resolve("Can not be empty?")
   }
 
-  if (gender === "not gay") {
+  if (gender.includes("not")) {
     return Promise.resolve("Why?")
   }
 

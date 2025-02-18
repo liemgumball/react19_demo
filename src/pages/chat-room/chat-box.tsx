@@ -1,15 +1,14 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { IMessage } from "@/store/chat-box-slice.ts"
-import React from "react"
+import { useOptimistic } from "react"
 import { ChatForm } from "./chat-form"
 import ChatMessage from "./chat-message"
 
 export function ChatBox({ data, sendMessage }: Props) {
-  const [messages, setOptimisticMessages] =
-    React.useOptimistic<OptimisticMessage[]>(data)
+  const [messages, setMessages] = useOptimistic<OptimisticMessage[]>(data)
 
   const optimisticUpdate = (message: IMessage) =>
-    setOptimisticMessages((prev) => [...prev, { ...message, isPending: true }])
+    setMessages((prev) => [...prev, { ...message, isPending: true }])
 
   return (
     <div className="my-10 flex flex-grow flex-col justify-between rounded-lg border-2 p-6 shadow-lg">
@@ -20,7 +19,11 @@ export function ChatBox({ data, sendMessage }: Props) {
       </ScrollArea>
       <ChatForm
         className="bottom-0 mt-4 w-full"
-        onSubmit={sendMessage}
+        onSubmit={async (message) => {
+          // optimisticUpdate(message)
+
+          await sendMessage(message)
+        }}
         optimisticUpdate={optimisticUpdate}
       />
     </div>

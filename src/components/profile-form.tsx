@@ -18,7 +18,7 @@ export const ProfileForm = () => {
     if (error) {
       toast({ title: "Error", description: error, variant: "destructive" })
     } else {
-      toast({ title: "Hi!", description: getGenderDescription(gender) })
+      toast({ title: "Success", description: getGenderDescription(gender) })
     }
     setPending(false)
   }

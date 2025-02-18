@@ -4,7 +4,6 @@ import { Button, ButtonProps } from "@/components/ui/button.tsx"
 import React from "react"
 import { requestFormReset } from "react-dom"
 
-// fix typing
 export const ResetFormButton: React.FC<Props> = ({
   onClick: _,
   type = "button",

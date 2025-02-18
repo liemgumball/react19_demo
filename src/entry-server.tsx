@@ -1,11 +1,9 @@
 import { startTransition, StrictMode } from "react"
+
 import { renderToString } from "react-dom/server"
 import { createStaticRouter, StaticRouterProvider } from "react-router"
 
-import { Toaster } from "@/components/ui/toaster.tsx"
-import store from "@/store"
 import { IncomingMessage, ServerResponse } from "http"
-import { Provider } from "react-redux"
 
 import { staticHandler } from "@/routes.ts"
 // @ts-expect-error no type
@@ -27,15 +25,15 @@ export async function render(
 
   let html
 
-  startTransition(() => {
+  startTransition(async () => {
     html = renderToString(
       <StrictMode>
-        <Provider store={store}>
-          <StaticRouterProvider context={context} router={router} />
-          <Toaster />
-        </Provider>
+        <StaticRouterProvider context={context} router={router} />
       </StrictMode>,
     )
   })
+
   return { html }
 }
+
+import.meta.hot?.accept?.()

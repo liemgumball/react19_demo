@@ -8,8 +8,8 @@ import { useActionState, useRef } from "react"
 
 export const NewProfileForm = () => {
   const ref = useRef(null)
-
-  const [error, action, pending] = useActionState(formAction, null)
+  // const {pending} = useFormStatus() // runtime error
+  const [error, action] = useActionState(formAction, null)
 
   return (
     <form className="space-y-8" action={action} ref={ref}>
@@ -20,7 +20,7 @@ export const NewProfileForm = () => {
         label="Gender:"
         placeholder="Enter your gender"
       />
-      <Button isLoading={pending} type="submit" className="w-full">
+      <Button type="submit" className="w-full">
         Submit
       </Button>
       <ResetFormButton formref={ref}>Reset</ResetFormButton>
@@ -38,7 +38,6 @@ async function formAction(
 
   if (error) {
     toast({ title: "Error", description: error, variant: "destructive" })
-
     return error
   }
 
