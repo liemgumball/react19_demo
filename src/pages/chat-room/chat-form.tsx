@@ -9,29 +9,24 @@ import {
 } from "@/components/ui/tooltip"
 import { toast } from "@/hooks/use-toast.ts"
 import { cn } from "@/lib/utils"
-import { addMessageAsync, IMessage } from "@/store/chat-box-slice"
+import { IMessage } from "@/store/chat-box-slice"
 import { SendIcon } from "lucide-react"
 import React from "react"
 
 interface Props {
   className?: string
-  onSubmit: (message: IMessage) => Promise<unknown>
-  optimisticUpdate?: React.Dispatch<IMessage>
+  onSubmit: (message: IMessage) => Promise<string | null>
 }
 
-export const ChatForm: React.FC<Props> = ({
-  className,
-  onSubmit,
-  optimisticUpdate,
-}) => {
+export const ChatForm: React.FC<Props> = ({ className, onSubmit }) => {
   const [error, action, isPending] = React.useActionState(
-    createFormAction(onSubmit, optimisticUpdate),
+    createFormAction(onSubmit),
     null,
   )
 
   return (
     <form className={cn(className)} action={action}>
-      {error && <p className="mx-4 mb-2 text-sm text-destructive">{error}</p>}
+      <p className="mx-4 mb-2 text-sm text-destructive">{error}</p>
       <div className="relative mb-2 px-2">
         <TooltipProvider>
           <Tooltip>
@@ -67,25 +62,18 @@ export const ChatForm: React.FC<Props> = ({
 }
 
 const createFormAction =
-  (
-    onSubmit: (message: IMessage) => Promise<unknown>,
-    optimisticUpdate?: React.Dispatch<IMessage>,
-  ) =>
+  (onSubmit: (message: IMessage) => Promise<string | null>) =>
   async (_: string | null, formData: FormData): Promise<string | null> => {
     const id = crypto.randomUUID()
     const text = (formData.get("message") as string).trim()
     const willRejected = formData.get("willRejected") === "on"
     const from = Math.random() > 0.5 ? "me" : "others"
 
-    optimisticUpdate?.({ text, willRejected, from, id })
-
     const error = await onSubmit({ text, willRejected, from, id })
 
-    if (addMessageAsync.rejected.match(error)) {
+    if (error) {
       toast({ title: "Failed to send message!", variant: "destructive" })
-
-      return "Failed to send message!"
     }
 
-    return null
+    return error
   }

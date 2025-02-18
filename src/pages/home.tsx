@@ -1,13 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { cn } from "@/lib/utils.ts"
-import * as React from "react"
-import { Link } from "react-router"
+import { ExampleCard } from "@/components/example-card.tsx"
 
 export default function Home() {
   return (
@@ -23,7 +14,7 @@ export default function Home() {
         description="Example of a message box for useOptimistic"
       />
       <ExampleCard
-        to="/pokemons"
+        to="/use-hook"
         title="use"
         description="Example of a message box for use hook"
       />
@@ -32,41 +23,12 @@ export default function Home() {
         title="Loading resources"
         description="Example of a message box for loading resources"
       />
-      <div className="col-span-1 h-[900px] md:col-span-2 lg:col-span-4" />
+      <div className="col-span-1 h-[700px] md:col-span-2 lg:col-span-4" />
       <ExampleCard
         to="/expensive"
         title="A very expensive component"
-        className="col-span-1 border-destructive text-destructive shadow-2xl shadow-destructive md:col-span-2"
+        className="col-span-1 mb-8 border-destructive text-destructive shadow-2xl shadow-destructive md:col-span-2 lg:col-span-4"
       />
     </div>
   )
-}
-
-const ExampleCard: React.FC<ExampleCardProps> = ({
-  title,
-  description,
-  children,
-  to,
-  className,
-}) => {
-  return (
-    <Card className={cn("max-h-40 min-w-fit", className)}>
-      <Link to={to}>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
-        <CardContent>{children}</CardContent>
-        <CardFooter>
-          <p className="text-sm text-muted-foreground">{description}</p>
-        </CardFooter>
-      </Link>
-    </Card>
-  )
-}
-
-interface ExampleCardProps extends React.PropsWithChildren {
-  title: string
-  description?: string
-  to: string
-  className?: string
 }

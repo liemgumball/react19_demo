@@ -20,11 +20,10 @@ export function ChatBox({ data, sendMessage }: Props) {
       <ChatForm
         className="bottom-0 mt-4 w-full"
         onSubmit={async (message) => {
-          // optimisticUpdate(message)
+          optimisticUpdate(message)
 
-          await sendMessage(message)
+          return await sendMessage(message)
         }}
-        optimisticUpdate={optimisticUpdate}
       />
     </div>
   )
@@ -32,7 +31,7 @@ export function ChatBox({ data, sendMessage }: Props) {
 
 type Props = {
   data: IMessage[]
-  sendMessage: (message: IMessage) => Promise<unknown>
+  sendMessage: (message: IMessage) => Promise<string | null>
 }
 
 type OptimisticMessage = IMessage & {

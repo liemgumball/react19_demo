@@ -72,7 +72,7 @@ const chatBoxSlice = createSlice({
         },
       )
       .addCase(addMessageAsync.rejected, (_, action) => {
-        console.error("Failed to add message:", action.error.message)
+        console.error("Failed to add message:", action)
       })
   },
 })

@@ -21,8 +21,22 @@ const routes: RouteObject[] = [
         Component: lazy(() => import("@/pages/expensive-page")),
       },
       {
-        path: "pokemons",
-        Component: lazy(() => import("@/pages/pokemon.tsx")),
+        path: "use-hook",
+        Component: lazy(() => import("@/pages/use-hook.tsx")),
+        children: [
+          {
+            path: "use-context",
+            Component: lazy(() => import("@/pages/use-context.tsx")),
+          },
+          {
+            path: "use-data",
+            Component: lazy(() => import("@/pages/use-data.tsx")),
+          },
+          {
+            path: "use-in-loop",
+            Component: lazy(() => import("@/pages/use-in-loop.tsx")),
+          },
+        ],
       },
       {
         path: "chat-room",

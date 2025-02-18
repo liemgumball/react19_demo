@@ -1,5 +1,4 @@
 import { FormControl } from "@/components/form-control.tsx"
-import { ResetFormButton } from "@/components/reset-form-button.tsx"
 import { Button } from "@/components/ui/button.tsx"
 import { updateGender } from "@/data/gender.ts"
 import { toast } from "@/hooks/use-toast.ts"
@@ -8,7 +7,6 @@ import { useActionState, useRef } from "react"
 
 export const NewProfileForm = () => {
   const ref = useRef(null)
-  // const {pending} = useFormStatus() // runtime error
   const [error, action] = useActionState(formAction, null)
 
   return (
@@ -23,7 +21,6 @@ export const NewProfileForm = () => {
       <Button type="submit" className="w-full">
         Submit
       </Button>
-      <ResetFormButton formref={ref}>Reset</ResetFormButton>
     </form>
   )
 }
@@ -42,7 +39,6 @@ async function formAction(
   }
 
   toast({ title: "Hi!", description: getGenderDescription(gender) })
-
   return null
 }
 
