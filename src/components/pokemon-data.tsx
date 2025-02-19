@@ -1,4 +1,3 @@
-// hydrate component
 import { PokemonCard } from "@/components/pokemon-card.tsx"
 import { Pokemon } from "@/data/pokemons.ts"
 import { FC, use } from "react"

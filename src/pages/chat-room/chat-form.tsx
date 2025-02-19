@@ -61,9 +61,10 @@ export const ChatForm: React.FC<Props> = ({ className, onSubmit }) => {
   )
 }
 
-const createFormAction =
-  (onSubmit: (message: IMessage) => Promise<string | null>) =>
-  async (_: string | null, formData: FormData): Promise<string | null> => {
+function createFormAction(
+  onSubmit: (message: IMessage) => Promise<string | null>,
+) {
+  return async function (_prev: string | null, formData: FormData) {
     const id = crypto.randomUUID()
     const text = (formData.get("message") as string).trim()
     const willRejected = formData.get("willRejected") === "on"
@@ -77,3 +78,4 @@ const createFormAction =
 
     return error
   }
+}

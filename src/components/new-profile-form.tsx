@@ -7,7 +7,7 @@ import { useActionState, useRef } from "react"
 
 export const NewProfileForm = () => {
   const ref = useRef(null)
-  const [error, action] = useActionState(formAction, null)
+  const [error, action, pending] = useActionState(formAction, null)
 
   return (
     <form className="space-y-8" action={action} ref={ref}>
@@ -18,17 +18,14 @@ export const NewProfileForm = () => {
         label="Gender:"
         placeholder="Enter your gender"
       />
-      <Button type="submit" className="w-full">
+      <Button isLoading={pending} type="submit" className="w-full">
         Submit
       </Button>
     </form>
   )
 }
 
-async function formAction(
-  _prev: FormState,
-  formData: FormData,
-): Promise<FormState> {
+async function formAction(_prev: FormState, formData: FormData) {
   const gender = formData.get("gender") as string
 
   const error = await updateGender(gender)
@@ -38,7 +35,7 @@ async function formAction(
     return error
   }
 
-  toast({ title: "Hi!", description: getGenderDescription(gender) })
+  toast({ title: "Success", description: getGenderDescription(gender) })
   return null
 }
 

@@ -1,13 +1,14 @@
 import { OtherPokemonData } from "@/components/other-pokemon-data.tsx"
 import { ToggleButton } from "@/components/toggle-button.tsx"
+import { Pokemon } from "@/data/pokemons.ts"
 import { useToggle } from "@/hooks/use-toggle.ts"
 
 const UseInLoop = () => {
   const [should, toggle] = useToggle(false)
 
   const dataPromise = Array.from({ length: 12 }, (_, idx) =>
-    fetch(`https://pokeapi.co/api/v2/pokemon/${idx + 1}`).then((res) =>
-      res.json(),
+    fetch(`https://pokeapi.co/api/v2/pokemon/${idx + 1}`).then(
+      (res) => res.json() as Promise<Pokemon>,
     ),
   )
 

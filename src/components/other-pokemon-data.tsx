@@ -3,11 +3,16 @@ import { Pokemon } from "@/data/pokemons.ts"
 import { FC, use } from "react"
 
 export const OtherPokemonData: FC<Props> = ({ dataPromise, should }) => {
+  const list: Pokemon[] = []
+
   if (!should) {
     return null
   }
 
-  const list = dataPromise.map(use) as Pokemon[]
+  for (let i = 0; i < 12; i++) {
+    const data = use(dataPromise[i]) as Pokemon
+    list.push(data)
+  }
 
   return (
     <>

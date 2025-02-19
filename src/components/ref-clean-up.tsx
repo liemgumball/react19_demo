@@ -5,9 +5,9 @@ export const Parent = () => {
     <div>
       <InputWithRefCallback
         ref={(current) => {
-          console.log("ref callback", current?.value)
+          console.log("callback", current?.value)
 
-          return () => console.log("ref cleanup")
+          return () => console.log("clean up")
         }}
       />
     </div>

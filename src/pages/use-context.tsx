@@ -5,6 +5,7 @@ import { use } from "react"
 
 const UseContext = () => {
   const [should, toggle] = useToggle(false)
+
   let now: Date | null = null
 
   if (should) {
@@ -17,7 +18,7 @@ const UseContext = () => {
 
       <p className="text-4xl">Toggle to get context value with "use hook"</p>
 
-      {now && <p>Now is {now?.toLocaleTimeString()}</p>}
+      {now && <p>Now is {now.toLocaleTimeString()}</p>}
     </div>
   )
 }
